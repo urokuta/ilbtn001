@@ -34,6 +34,11 @@ end
 function recv_name(d) d = string.gsub(d, '\000', '') file.remove(d) file.open(d, 'w') uart.on('data', 130, recv_block, 0) uart.write(0, '\006') end
 function recv() uart.setup(0,9600,8,0,1,0) uart.on('data', '\000', recv_name, 0) uart.write(0, 'C') end
 """
+send_lua = \
+r"""
+function send_block(d) l = string.len(d) uart.write(0, '\001' + string.char(l) + string.rep(' ', 128 - l)) return l end
+function send_file(f) file.open(f) s=file.seek('end', 0) p=0 while (p<s) do file.seek('set',p) p=p+send_block(file.read(128)) end send_block('') file.close() end
+"""
 
 CHUNK_END = '\v'
 CHUNK_REPLY = '\v'
