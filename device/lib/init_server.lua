@@ -1,5 +1,5 @@
 local compileAndRemoveIfNeeded = function(f)
-   if file.open("lib/" .. f) then
+   if file.open(f) then
       file.close()
       print('Compiling:', f)
       node.compile(f)

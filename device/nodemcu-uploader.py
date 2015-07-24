@@ -53,7 +53,7 @@ class MyMiniterm(Miniterm):
 
 class Uploader:
     BAUD = 9600
-    PORT = '/dev/ttyUSB0'
+    PORT = '/dev/tty.usbserial-DC008U7D'
     TIMEOUT = 5
 
     def expect(self, exp='> ', timeout=TIMEOUT):

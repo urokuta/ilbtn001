@@ -1,9 +1,9 @@
-print("loading start.lua...")
-package.path = package.path .. ";lib\\?.lua"
+print("loading start.lc...")
+package.path = package.path .. ";lib\\?.lc"
 -- warning when define global variable
-dofile("lib/disable_global.lua")
+dofile("lib/disable_global.lc")
 -- open class (like table.tostring)
-dofile("lib/util.lua")
+dofile("lib/util.lc")
 require 'lib.logger'
 require 'lib.config'
 require 'lib.device'
@@ -15,9 +15,9 @@ logger.info("mode: %s", device.mode)
 
 -- main routine
 if device.mode == "normal" then
-  dofile("./process_normal.lua")
+  dofile("./process_normal.lc")
 elseif device.mode == "setting" then
-  dofile("./process_setting.lua")
+  dofile("./process_setting.lc")
 else
   logger.error("unknown device mode: ", device.mode)
 end

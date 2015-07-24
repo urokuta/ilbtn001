@@ -6,7 +6,7 @@ function get(url, callback)
   else
     local http = require 'socket.http'
     local r,c,h = http.request{
-      url = "http://www.lua.org/"
+      url = url
     }
     logger.info("code: %s", c)
     if c == 200 then
