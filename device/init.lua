@@ -1,2 +1,2 @@
 print("Welcome to the illmatic world.")
-dofile("start.lc")
+print("if you want to do init_do.lc, plz do it")
