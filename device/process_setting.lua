@@ -1,2 +1,5 @@
 dofile("lib/init_server.lua")
+wifi.ap.config({ssid="ilbtn001", pwd="illmaticbutton"})
+logger.info("wifi ip: %s", wifi.ap.getip())
+logger.info("start to listen 80 port as http server..")
 dofile("httpserver.lc")(80)

@@ -4,7 +4,7 @@ function read_gpio()
   if config.env == "prd" then
     return gpio.read(2)
   else
-    return config.gpio
+    return config.dev.gpio
   end
 end
 
@@ -13,3 +13,4 @@ function is_setting_button_pushed()
 end
 
 device.mode = device.is_setting_button_pushed() and "setting" or "normal"
+
