@@ -11,3 +11,8 @@ config.env = config.is_pc and "dev" or "prd"
 -- when you push the button, it will be 0.
 config.dev = {}
 config.dev.gpio = 1
+config.host = "ilbtn.herokuapp.com"
+config.api_path = "/serial/"
+config.ap = {}
+config.ap.ssid = "ilbtn001"
+config.ap.pwd = "12345678"

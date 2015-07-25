@@ -26,9 +26,14 @@ end
 -- main routine
 if device.mode == "normal" then
   wifi.setmode(wifi.STATION)
+  logger.info("wifi.STATION mode configured.")
   dofile("process_normal.lc")
 elseif device.mode == "setting" then
+  -- cross communitation requires wifi.STATIONAP even if http request/respond
   wifi.setmode(wifi.STATIONAP)
+  logger.info("wifi.STATIONAP mode configured.")
+  wifi.sta.disconnect()
+  logger.info("wifi.sta.disconnect()ed.")
   dofile("process_setting.lc")
 else
   logger.error("unknown device mode: ", device.mode)
