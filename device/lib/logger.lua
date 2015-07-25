@@ -1,8 +1,7 @@
 module("logger", package.seeall)
-require 'lib.ansicolors'
 require 'lib.date'
 
-function to_s(level, color, ...)
+function to_s(level, ...)
   local args = {...}
   -- first argument is format string.
   local str = args[1]
@@ -16,20 +15,18 @@ function to_s(level, color, ...)
     str = string.format(str, to_str)
   end
   local t = date.now()
-  -- color1[Time][Level]color1end color2[LogContent]color2end
-  local f = "%s[%s][%s]%s %s%s%s"
-  -- ansicolors.XXX is table, not string
-  local left_color = ansicolors.magenta["value"]
-  local result = string.format(f, left_color, t, level, ansicolors.reset["value"], color, str, ansicolors.reset["value"])
+  -- [Time][Level] [LogContent]
+  local f = "[%s][%s] %s"
+  local result = string.format(f, t, level, str)
   return result
 end
 
 function info(...)
-  local s = to_s("INFO", ansicolors.reset["value"], ...)
+  local s = to_s("INFO", ...)
   print(s)
 end
 function error(...)
-  local s = to_s("ERROR", ansicolors.red["value"], ...)
+  local s = to_s("ERROR", ...)
   print(s)
 end
 
