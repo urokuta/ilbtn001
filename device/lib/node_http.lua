@@ -14,8 +14,6 @@ end
 function _get_prd(host, path, callback)
   logger.info("resolve host..")
   getip(host, function(conn, ip)
-    print(ip)
-    logger.info("ip resolved. ip: %s", ip)
     logger.info("creating connection..")
     conn:on("receive", function()
       callback()
@@ -23,13 +21,24 @@ function _get_prd(host, path, callback)
     conn:connect(80, ip)
     logger.info("connected.")
     logger.info("request path: %s", path)
-    conn:send("GET " .. path .. " HTTP/1.1\r\nHost: " .. host .. "\r\nConnection: keep-alive\r\nAccept: */*\r\n\r\n")
+    local request = "GET " .. path .. " HTTP/1.1\r\nHost: " .. host .. "\r\nConnection: keep-alive\r\nAccept: */*\r\n\r\n"
+    logger.info(request)
+    conn:send(request)
   end)
 end
 
 function getip(host, callback)
   local conn = net.createConnection(net.TCP, 0)
-  conn:dns(host, function(_conn,ip) callback(_conn, ip) end)
+  conn:dns(host, function(_conn,ip)
+    if ip == nil then
+      logger.error("dns resolve failed. retry.")
+      tmr.delay(1000*100)
+      getip(host, callback)
+    else
+      logger.info("ip resolved. ip: %s", ip)
+      callback(_conn, ip)
+    end
+  end)
   conn = nil
 end
 

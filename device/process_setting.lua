@@ -1,6 +1,6 @@
-logger.info("wifi.phymode: wifi.PHYMODE_B")
+logger.info("wifi.phymode: wifi.PHYMODE_G")
 wifi.ap.config({ssid=config.ap.ssid, pwd=config.ap.pwd})
-wifi.setphymode(wifi.PHYMODE_B)
+wifi.setphymode(wifi.PHYMODE_G)
 logger.info("wifi.ap configured. ssid: %s", config.ap.ssid)
 logger.info("wifi ip: %s", wifi.ap.getip())
 logger.info("start to listen 80 port as http server..")
